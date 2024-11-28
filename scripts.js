@@ -1,3 +1,47 @@
+const excelFileUrl = 'https://raw.githubusercontent.com/yourusername/repository-name/branch-name/filename.xlsx';
+
+function fetchAndProcessExcel() {
+    fetch(excelFileUrl)
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            const json = XLSX.utils.sheet_to_json(worksheet);
+
+            console.log('Excel data:', json); // Debugging statement
+
+            // Use all columns from the Excel file
+            books = json.map(row => {
+                const book = {};
+                Object.keys(row).forEach(key => {
+                    book[key] = row[key] ? row[key].toString() : 'No Data';
+                });
+                return book;
+            });
+
+            console.log('Books array after loading Excel:', books); // Debugging statement
+            saveBooksToLocalStorage();
+        })
+        .catch(error => {
+            console.error('Error fetching the Excel file:', error);
+            alert('Failed to fetch the Excel file.');
+        });
+}
+
+// Call this function to load the Excel file on page load
+window.onload = () => {
+    fetchAndProcessExcel();
+
+    // Other initialization code
+    if (books.length > 0) {
+        console.log('Books data loaded from local storage:', books); // Debugging statement
+    }
+
+    // Add event listener to the theme toggle button
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+};
+
 const correctPassword = 'your-secret-password'; // Change this to your desired password
 let books = JSON.parse(localStorage.getItem('books')) || [];
 let filteredBooks = [];
@@ -94,41 +138,6 @@ function generateReportTable(books) {
     return table;
 }
 
-function uploadExcel() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[sheetName];
-            const json = XLSX.utils.sheet_to_json(worksheet);
-
-            console.log('Excel data:', json); // Debugging statement
-
-            // Use all columns from the Excel file
-            books = json.map(row => {
-                const book = {};
-                Object.keys(row).forEach(key => {
-                    book[key] = row[key] ? row[key].toString() : 'No Data';
-                });
-                return book;
-            });
-
-            console.log('Books array after loading Excel:', books); // Debugging statement
-            saveBooksToLocalStorage();
-            alert("Excel file uploaded and data saved.");
-            window.location.reload(); // Reload to fetch updated data
-        };
-        reader.readAsArrayBuffer(file);
-    } else {
-        alert("Please upload an Excel file.");
-    }
-}
-
 function checkPassword() {
     const passwordInput = document.getElementById('passwordInput').value;
     console.log('Entered password:', passwordInput); // Debugging statement
@@ -168,16 +177,6 @@ function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const targetTheme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", targetTheme);
-}
-
-// Fetch books data from local storage on page load
-window.onload = () => {
-    if (books.length > 0) {
-        console.log('Books data loaded from local storage:', books); // Debugging statement
-    }
-
-    // Add event listener to the theme toggle button
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 }
 
 function showAbout() {
