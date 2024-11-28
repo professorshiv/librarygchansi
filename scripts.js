@@ -1,8 +1,8 @@
-const proxyUrl = 'http://cors.io/';
+const proxyUrl = 'https://cors.io/?';
 const jsonFileUrl = 'https://gist.github.com/professorshiv/6fc122aa5798e27551dd22a7375b71ea/raw/6ce3261b300b44a37d20625f570fc85df7726df7/librarygchansidatafile.json';
 
 function fetchAndProcessJson() {
-    fetch(proxyUrl + jsonFileUrl)
+    fetch(proxyUrl + encodeURIComponent(jsonFileUrl))
         .then(response => response.json())
         .then(data => {
             console.log('JSON data:', data); // Debugging statement
