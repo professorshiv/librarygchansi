@@ -1,23 +1,10 @@
-const proxyUrl = 'https://cors.io/?';
 const jsonFileUrl = 'https://gist.github.com/professorshiv/6fc122aa5798e27551dd22a7375b71ea/raw/6ce3261b300b44a37d20625f570fc85df7726df7/librarygchansidatafile.json';
 
 function fetchAndProcessJson() {
-    fetch(proxyUrl + encodeURIComponent(jsonFileUrl))
-        .then(response => response.json())
-        .then(data => {
-            console.log('JSON data:', data); // Debugging statement
-
-            // Use all columns from the JSON file
-            books = data.map(row => {
-                const book = {};
-                Object.keys(row).forEach(key => {
-                    book[key] = row[key] ? row[key].toString() : 'No Data';
-                });
-                return book;
-            });
-
-            console.log('Books array after loading JSON:', books); // Debugging statement
-            saveBooksToLocalStorage();
+    fetch(jsonFileUrl, { mode: 'no-cors' })
+        .then(response => {
+            // Note: In no-cors mode, we cannot access the response body
+            console.log('Fetch succeeded with no-cors mode, but cannot access response body due to security restrictions.');
         })
         .catch(error => {
             console.error('Error fetching the JSON file:', error);
