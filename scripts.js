@@ -154,6 +154,7 @@ function toggleTheme() {
 
     // Add event listener to the theme toggle button
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+}
 
     // Load the saved theme on page load
     window.onload = () => {
