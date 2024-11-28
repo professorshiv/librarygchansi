@@ -1,4 +1,4 @@
-const proxyUrl = 'https://your-worker-name.workers.dev/';
+const proxyUrl = 'https://librarygchansi.kumarshiv.workers.dev/';
 const jsonFileUrl = 'https://raw.githubusercontent.com/professorshiv/librarygchansi/main/datafile.json';
 
 function fetchAndProcessJson() {
