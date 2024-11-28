@@ -37,7 +37,6 @@ window.onload = () => {
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 };
 
-const correctPassword = 'your-secret-password'; // Change this to your desired password
 let books = JSON.parse(localStorage.getItem('books')) || [];
 let filteredBooks = [];
 
@@ -131,28 +130,6 @@ function generateReportTable(books) {
     }
 
     return table;
-}
-
-function checkPassword() {
-    const passwordInput = document.getElementById('passwordInput').value;
-    console.log('Entered password:', passwordInput); // Debugging statement
-    if (passwordInput === correctPassword) {
-        console.log('Password correct'); // Debugging statement
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('uploadSection').style.display = 'block';
-    } else {
-        alert('Incorrect password. Please try again.');
-    }
-}
-
-function showLoginModal() {
-    console.log('Showing login modal'); // Debugging statement
-    document.getElementById('loginModal').style.display = 'flex';
-}
-
-function closeLoginModal() {
-    console.log('Closing login modal'); // Debugging statement
-    document.getElementById('loginModal').style.display = 'none';
 }
 
 function resetSearch() {
