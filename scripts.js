@@ -1,7 +1,8 @@
-const excelFileUrl = 'https://github.com/professorshiv/librarygchansi/raw/refs/heads/main/datafile.xlsx';
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+const excelFileUrl = 'https://raw.githubusercontent.com/professorshiv/librarygchansi/main/datafile.xlsx';
 
 function fetchAndProcessExcel() {
-    fetch(excelFileUrl)
+    fetch(proxyUrl + excelFileUrl)
         .then(response => response.arrayBuffer())
         .then(data => {
             const workbook = XLSX.read(data, { type: 'array' });
