@@ -183,7 +183,7 @@ function showAbout() {
             <li>Vijay Kumar Yadav, Convener</li>
             <li>Shiv Kumar, Technical Advisor</li>
         </ul>
-        <button id="themeToggle" onclick="toggleTheme()">Switch Mode</button>
+        <button id="themeToggle" onclick="toggleTheme()">Switch Theme</button>
         <button onclick="closeAbout()">Close</button>
     `;
     aboutSection.style.display = 'block';
