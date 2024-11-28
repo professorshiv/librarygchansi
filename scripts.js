@@ -1,13 +1,14 @@
-const jsonFileUrl = 'https://github.com/professorshiv/librarygchansi/raw/refs/heads/main/pagedataconnector.html';
+const proxyUrl = 'https://your-worker-name.workers.dev/';
+const jsonFileUrl = 'https://raw.githubusercontent.com/professorshiv/librarygchansi/main/datafile.json';
 
 function fetchAndProcessJson() {
-    fetch(jsonFileUrl)
+    fetch(proxyUrl + encodeURIComponent(jsonFileUrl))
         .then(response => response.json())
         .then(data => {
             console.log('JSON data:', data); // Debugging statement
 
             // Use all columns from the JSON file
-            books = data.books.map(row => {
+            books = data.map(row => {
                 const book = {};
                 Object.keys(row).forEach(key => {
                     book[key] = row[key] ? row[key].toString() : 'No Data';
