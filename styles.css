@@ -135,24 +135,6 @@ th, td {
     margin-bottom: 10px;
 }
 
-/* Admin Login Button */
-#adminLoginButton {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    background-color: var(--button-bg-color, #007BFF);
-    color: var(--button-text-color, #fff);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-#adminLoginButton:hover {
-    background-color: var(--button-hover-bg-color, #0056b3);
-}
-
 /* Return to Top Button */
 #returnTopButton {
     margin-top: 20px;
