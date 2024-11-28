@@ -1,4 +1,4 @@
-const jsonFileUrl = 'URL_FROM_YOUR_GITHUB_PAGES_FILE';
+const jsonFileUrl = 'https://github.com/professorshiv/librarygchansi/raw/refs/heads/main/pagedataconnector.html';
 
 function fetchAndProcessJson() {
     fetch(jsonFileUrl)
