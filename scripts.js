@@ -1,19 +1,13 @@
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const excelFileUrl = 'https://raw.githubusercontent.com/professorshiv/librarygchansi/main/datafile.xlsx';
+const jsonFileUrl = 'https://raw.githubusercontent.com/yourusername/repository-name/branch-name/datafile.json';
 
-function fetchAndProcessExcel() {
-    fetch(proxyUrl + excelFileUrl)
-        .then(response => response.arrayBuffer())
+function fetchAndProcessJson() {
+    fetch(jsonFileUrl)
+        .then(response => response.json())
         .then(data => {
-            const workbook = XLSX.read(data, { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[sheetName];
-            const json = XLSX.utils.sheet_to_json(worksheet);
+            console.log('JSON data:', data); // Debugging statement
 
-            console.log('Excel data:', json); // Debugging statement
-
-            // Use all columns from the Excel file
-            books = json.map(row => {
+            // Use all columns from the JSON file
+            books = data.map(row => {
                 const book = {};
                 Object.keys(row).forEach(key => {
                     book[key] = row[key] ? row[key].toString() : 'No Data';
@@ -21,18 +15,18 @@ function fetchAndProcessExcel() {
                 return book;
             });
 
-            console.log('Books array after loading Excel:', books); // Debugging statement
+            console.log('Books array after loading JSON:', books); // Debugging statement
             saveBooksToLocalStorage();
         })
         .catch(error => {
-            console.error('Error fetching the Excel file:', error);
-            alert('Failed to fetch the Excel file.');
+            console.error('Error fetching the JSON file:', error);
+            alert('Failed to fetch the JSON file.');
         });
 }
 
-// Call this function to load the Excel file on page load
+// Call this function to load the JSON file on page load
 window.onload = () => {
-    fetchAndProcessExcel();
+    fetchAndProcessJson();
 
     // Other initialization code
     if (books.length > 0) {
